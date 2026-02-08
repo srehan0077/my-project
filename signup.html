@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sign Up | AI Resume Analyzer</title>
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+
+    <h2>Create Account</h2>
+    <p class="subtitle">Start analyzing resumes</p>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="signup()">Sign Up</button>
+
+    <p class="switch">
+      Already have an account?
+      <a href="login.html">Login</a>
+    </p>
+
+  </div>
+</div>
+
+<script>
+function signup(){
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if(name === "" || email === "" || password === ""){
+    alert("All fields required");
+    return;
+  }
+
+  // Password validation
+  const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*]).{6,}$/;
+
+  if(!passwordRegex.test(password)){
+    alert(
+      "Password must be at least 6 characters and include a number and a special character"
+    );
+    return;
+  }
+
+  localStorage.setItem("userName", name);
+  localStorage.setItem("userEmail", email);
+  localStorage.setItem("userPassword", password); // demo only
+
+  alert("Signup successful. Please login.");
+  window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+</html>

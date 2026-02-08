@@ -1,0 +1,68 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,Arial;
+}
+
+body{
+  background:linear-gradient(135deg,#F9FAFB,#EEF2FF);
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.auth-container{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+
+.auth-card{
+  background:#fff;
+  padding:40px;
+  width:340px;
+  border-radius:16px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.06);
+}
+
+.auth-card h2{
+  margin-bottom:8px;
+}
+
+.subtitle{
+  font-size:14px;
+  color:#6B7280;
+  margin-bottom:25px;
+}
+
+.auth-card input{
+  width:100%;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:10px;
+  border:1px solid #E5E7EB;
+}
+
+.auth-card button{
+  width:100%;
+  padding:12px;
+  background:#2563EB;
+  color:#fff;
+  border:none;
+  border-radius:10px;
+  font-size:15px;
+  cursor:pointer;
+}
+
+.switch{
+  margin-top:20px;
+  font-size:14px;
+  text-align:center;
+}
+
+.switch a{
+  color:#2563EB;
+  text-decoration:none;
+}

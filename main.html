@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AI Resume Analyzer Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<div class="topbar-actions">
+  <span id="themeIcon" onclick="toggleTheme()" style="cursor:pointer;font-size:18px;">🌙</span>
+<img id="sidebarProfileImg"
+     src="c:\Users\Rehan\Downloads\shizuka.webp"
+     alt="Profile"
+     style="width:40px;height:40px;border-radius:50%;display:none;margin-bottom:20px;">
+
+</div>
+<body>
+
+
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="brand">
+    <span class="logo">AI</span>
+    <span class="logo-text">Resume</span>
+  </div>
+  <nav>
+    <a class="active" data-tooltip="Dashboard" onclick="switchPage('dashboard',this)">
+      <span class="icon">🏠</span><span class="text">Dashboard</span>
+    </a>
+    <a data-tooltip="Resume Analyzer" onclick="switchPage('resume',this)">
+      <span class="icon">📄</span><span class="text">Resume Analyzer</span>
+    </a>
+    <a data-tooltip="Resume Creator" onclick="switchPage('creator',this)">
+  <span class="icon">📝</span>
+  <span class="text">Resume Creator</span>
+</a>
+    <a data-tooltip="Blogs" onclick="switchPage('blogs',this)">
+      <span class="icon">✍️</span><span class="text">Blogs</span>
+    </a>
+    <a data-tooltip="Settings" onclick="switchPage('settings',this)">
+      <span class="icon">⚙️</span><span class="text">Settings</span>
+    </a>
+  </nav>
+</aside>
+
+<!-- MAIN -->
+<main class="content">
+
+<header class="topbar">
+  <h2 id="pageTitle">Dashboard</h2>
+
+  <div class="topbar-actions">
+    <img id="topProfileImg" alt="Profile">
+
+    <div class="menu-wrapper">
+      <span class="dots" onclick="toggleMenu()">⋮</span>
+
+      <div class="dropdown" id="menu">
+        <div onclick="openSettings()">⚙ Settings</div>
+        <div class="logout" onclick="logout()">🚪 Logout</div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- DASHBOARD -->
+<section id="dashboard" class="page active">
+
+  <div class="stats">
+    <div class="stat-card highlight"><p>Resume Score</p><h1 id="scoreText">82%</h1></div>
+    <div class="stat-card"><p>Matched Skills</p><h1>14</h1></div>
+    <div class="stat-card danger"><p>Missing Skills</p><h1>6</h1></div>
+    <div class="stat-card"><p>Suggested Role</p><h1>Frontend Dev</h1></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card center">
+      <h3>ATS Compatibility</h3>
+      <div class="progress-circle" id="atsCircle">
+        <span id="atsValue">0%</span>
+      </div>
+      <p class="muted">Resume optimized for ATS systems</p>
+    </div>
+
+    <div class="card">
+      <h3>Skill Match Overview</h3>
+
+      <label>Frontend</label>
+      <div class="bar"><div class="fill green" data-width="85%"></div></div>
+
+      <label>Backend</label>
+      <div class="bar"><div class="fill red" data-width="40%"></div></div>
+
+      <label>Soft Skills</label>
+      <div class="bar"><div class="fill blue" data-width="65%"></div></div>
+    </div>
+  </div>
+
+</section> <!-- ✅ DASHBOARD CLOSED -->
+
+<!-- RESUME CREATOR (SIBLING, NOT CHILD) -->
+<section id="creator" class="page">
+
+  <div class="grid-2">
+
+    <!-- FORM -->
+    <div class="card">
+      <h3>Resume Creator</h3>
+
+      <input type="text" id="c_name" placeholder="Full Name">
+      <input type="text" id="c_role" placeholder="Job Role">
+      <input type="email" id="c_email" placeholder="Email">
+
+      <textarea id="c_skills" placeholder="Skills (comma separated)"></textarea>
+      <textarea id="c_projects" placeholder="Projects"></textarea>
+      <textarea id="c_education" placeholder="Education"></textarea>
+
+      <button onclick="updateResume()">Update Preview</button>
+      <button onclick="downloadResume()">Download Resume</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="card resume-preview">
+      <h2 id="p_name">Your Name</h2>
+      <h4 id="p_role">Job Role</h4>
+      <p id="p_email">email@example.com</p>
+
+      <hr>
+
+      <h4>Skills</h4>
+      <p id="p_skills"></p>
+
+      <h4>Projects</h4>
+      <p id="p_projects"></p>
+
+      <h4>Education</h4>
+      <p id="p_education"></p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SKILL GAP PROGRESS -->
+<div class="card">
+  <h3>Skill Gap Progress</h3>
+  <p>6 of 10 required skills matched</p>
+
+  <div class="bar">
+    <div class="fill blue" style="width:60%"></div>
+  </div>
+</div>
+
+<!-- TOP COURSES -->
+<div class="card">
+  <h3>Recommended Courses</h3>
+
+  <ul class="course-list">
+    <li>Node.js Bootcamp – Udemy</li>
+    <li>System Design Basics – Educative</li>
+    <li>DSA for Interviews – Coursera</li>
+  </ul>
+</div>
+
+<!-- ACTIVITY TIMELINE -->
+<div class="card">
+  <h3>Recent Activity</h3>
+
+  <ul class="timeline">
+    <li><span>📄</span> Resume uploaded</li>
+    <li><span>📊</span> ATS score calculated</li>
+    <li><span>🎓</span> Course viewed</li>
+    <li><span>✍️</span> Blog read</li>
+  </ul>
+</div>
+
+<!-- COMPARISON PLACEHOLDER -->
+<div class="card muted-box">
+  <h3>Resume Comparison</h3>
+  <p>Compare your resume with another candidate</p>
+  <button disabled>Coming Soon</button>
+</div>
+
+
+<button onclick="downloadReport()">Download Analysis Report</button>
+
+</section>
+
+<!-- RESUME ANALYZER -->
+<section id="resume" class="page">
+  <div class="card">
+    <h3>Upload Resume</h3>
+    <p>Select resume (.txt) to recalculate ATS score.</p>
+
+    <input type="file" id="resumeUpload" accept=".txt" hidden>
+    <button onclick="triggerUpload()">Upload Resume</button>
+
+    <p class="muted">*Demo supports .txt files only</p>
+  </div>
+</section>
+
+<!-- BLOGS -->
+<section id="blogs" class="page">
+  <div class="card">Blogs Page</div>
+</section>
+
+<!-- SETTINGS -->
+<section id="settings" class="page">
+  <div class="card">
+
+    <h3>Settings</h3>
+<!-- APPEARANCE -->
+<div class="setting-group">
+  <h4>Appearance</h4>
+  <label>
+    <input type="checkbox" id="darkModeToggle">
+    Enable Dark Mode
+  </label>
+</div>
+
+    <!-- PROFILE -->
+    <div class="setting-group">
+  <h4>Profile Image</h4>
+  <input type="file" id="profileImgInput" accept="image/*">
+  <img id="profilePreview" src="" alt="Profile Preview"
+       style="width:80px;height:80px;border-radius:50%;margin-top:10px;display:none;">
+</div>
+    <!-- RESUME SETTINGS -->
+    <div class="setting-group">
+      <h4>Resume Analyzer</h4>
+      <label>
+        <input type="checkbox" id="atsEnable" checked>
+        Enable ATS Score
+      </label>
+      <label>
+        <input type="checkbox" id="skillGap" checked>
+        Highlight Missing Skills
+      </label>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="setting-group">
+      <h4>Notifications</h4>
+      <label>
+        <input type="checkbox" id="emailNotify" checked>
+        Email Alerts
+      </label>
+      <label>
+        <input type="checkbox" id="blogNotify">
+        Blog Updates
+      </label>
+    </div>
+
+    <!-- SECURITY -->
+    <div class="setting-group">
+      <h4>Security</h4>
+      <button onclick="logout()">Logout from all devices</button>
+    </div>
+
+    <button onclick="saveSettings()">Save Settings</button>
+
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+/* PAGE SWITCH */
+function switchPage(id,el){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  document.getElementById("pageTitle").innerText=id.charAt(0).toUpperCase()+id.slice(1);
+  if(el){
+    document.querySelectorAll(".sidebar a").forEach(a=>a.classList.remove("active"));
+    el.classList.add("active");
+  }
+}
+function toggleMenu(){
+  document.getElementById("menu").classList.toggle("show");
+}
+
+function openSettings(){
+  document.getElementById("menu").classList.remove("show");
+  switchPage("settings");
+}
+
+function logout(){
+  localStorage.clear();
+  window.location.href = "login.html";
+}
+
+document.addEventListener("click", function(e){
+  const menu = document.getElementById("menu");
+  const dots = document.querySelector(".dots");
+
+  if(!menu.contains(e.target) && !dots.contains(e.target)){
+    menu.classList.remove("show");
+  }
+});
+
+/* BAR ANIMATION */
+function animateBars(){
+  document.querySelectorAll(".fill").forEach(b=>{
+    b.style.width="0";
+    setTimeout(()=>b.style.width=b.dataset.width,300);
+  });
+}
+
+/* ATS ANIMATION */
+function animateATS(target){
+  let current=0;
+  const circle=document.getElementById("atsCircle");
+  const value=document.getElementById("atsValue");
+
+  circle.style.background="conic-gradient(#E5E7EB 0deg,#E5E7EB 360deg)";
+  value.innerText="0%";
+
+  const timer=setInterval(()=>{
+    current++;
+    value.innerText=current+"%";
+    circle.style.background=
+      `conic-gradient(#2563EB ${current*3.6}deg,#E5E7EB 0deg)`;
+    if(current>=target) clearInterval(timer);
+  },20);
+}
+
+/* RESUME UPLOAD */
+function triggerUpload(){
+  document.getElementById("resumeUpload").click();
+}
+
+document.getElementById("resumeUpload").addEventListener("change",function(){
+  const file=this.files[0];
+  if(!file) return;
+
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const text=e.target.result.toLowerCase();
+    recalcATS(text);
+  };
+  reader.readAsText(file);
+});
+
+/* ATS RECALC */
+function recalcATS(text){
+  const keywords=["html","css","javascript","react","node","sql","git","api"];
+  let match=0;
+  keywords.forEach(k=>{ if(text.includes(k)) match++; });
+  let score=Math.round((match/keywords.length)*100);
+  if(score>95) score=95;
+
+  document.getElementById("scoreText").innerText=score+"%";
+  animateATS(score);
+}
+
+/* INIT */
+window.onload=()=>{
+  animateBars();
+  animateATS(82);
+};
+function logout(){
+  alert("Logged out");
+  location.href="login.html";
+}
+function saveSettings(){
+  const settings = {
+    name: document.getElementById("setName").value,
+    email: document.getElementById("setEmail").value,
+    ats: document.getElementById("atsEnable").checked,
+    skillGap: document.getElementById("skillGap").checked,
+    emailNotify: document.getElementById("emailNotify").checked,
+    blogNotify: document.getElementById("blogNotify").checked
+  };
+
+  localStorage.setItem("appSettings", JSON.stringify(settings));
+  alert("Settings saved successfully");
+}
+
+const darkToggle = document.getElementById("darkModeToggle");
+
+if(localStorage.getItem("darkMode") === "true"){
+  document.body.classList.add("dark");
+  darkToggle.checked = true;
+}
+
+darkToggle.addEventListener("change",()=>{
+  if(darkToggle.checked){
+    document.body.classList.add("dark");
+    localStorage.setItem("darkMode","true");
+  } else {
+    document.body.classList.remove("dark");
+    localStorage.setItem("darkMode","false");
+  }
+});
+
+const imgInput = document.getElementById("profileImgInput");
+const preview = document.getElementById("profilePreview");
+
+if(localStorage.getItem("profileImage")){
+  preview.src = localStorage.getItem("profileImage");
+  preview.style.display = "block";
+}
+
+imgInput.addEventListener("change",()=>{
+  const file = imgInput.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    localStorage.setItem("profileImage", reader.result);
+    preview.src = reader.result;
+    preview.style.display = "block";
+  };
+  reader.readAsDataURL(file);
+});
+
+const themeIcon = document.getElementById("themeIcon");
+
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+
+  if(document.body.classList.contains("dark")){
+    themeIcon.innerText = "☀️";
+    localStorage.setItem("darkMode","true");
+  } else {
+    themeIcon.innerText = "🌙";
+    localStorage.setItem("darkMode","false");
+  }
+}
+
+// Load saved theme
+if(localStorage.getItem("darkMode") === "true"){
+  document.body.classList.add("dark");
+  themeIcon.innerText = "☀️";
+}
+
+// Load profile image everywhere
+const sidebarImg = document.getElementById("sidebarProfileImg");
+const topImg = document.getElementById("topProfileImg");
+
+const savedImg = localStorage.getItem("profileImage");
+
+if(savedImg){
+  sidebarImg.src = savedImg;
+  sidebarImg.style.display = "block";
+
+  topImg.src = savedImg;
+  topImg.style.display = "block";
+}
+function updateResume(){
+  document.getElementById("p_name").innerText =
+    document.getElementById("c_name").value || "Your Name";
+
+  document.getElementById("p_role").innerText =
+    document.getElementById("c_role").value || "Job Role";
+
+  document.getElementById("p_email").innerText =
+    document.getElementById("c_email").value || "email@example.com";
+
+  document.getElementById("p_skills").innerText =
+    document.getElementById("c_skills").value;
+
+  document.getElementById("p_projects").innerText =
+    document.getElementById("c_projects").value;
+
+  document.getElementById("p_education").innerText =
+    document.getElementById("c_education").value;
+}
+
+function downloadResume(){
+  window.print(); // viva-safe PDF method
+}
+
+
+</script>
+
+</body>
+</html>

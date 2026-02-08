@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login | AI Resume Analyzer</title>
+<link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+<div class="auth-container">
+  <div class="auth-card">
+
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Login to continue</p>
+
+    <input type="email" id="loginEmail" placeholder="Email">
+    <input type="password" id="loginPassword" placeholder="Password">
+
+    <button onclick="login()">Login</button>
+
+    <p class="switch">
+      Don’t have an account?
+      <a href="signup.html">Sign up</a>
+    </p>
+
+  </div>
+</div>
+
+<script>
+function login(){
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
+
+  if(email === "" || password === ""){
+    alert("All fields required");
+    return;
+  }
+
+  const storedEmail = localStorage.getItem("userEmail");
+  const storedPassword = localStorage.getItem("userPassword");
+
+  if(email !== storedEmail || password !== storedPassword){
+    alert("Invalid email or password");
+    return;
+  }
+
+  localStorage.setItem("userLoggedIn", "true");
+  window.location.href = "main.html";
+}
+
+</script>
+
+</body>
+</html>
