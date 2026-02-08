@@ -12,7 +12,7 @@ function signup() {
 
   localStorage.setItem("user", JSON.stringify(user));
   alert("Signup successful");
-  window.location.href = "login.html";
+  window.location.href = "index.html";
 }
 
 function login() {
@@ -29,3 +29,4 @@ function login() {
   localStorage.setItem("loggedIn", "true");
   window.location.href = "main.html";
 }
+
