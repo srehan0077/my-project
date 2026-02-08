@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <meta charset="UTF-8">
 <title>AI Resume Analyzer Dashboard</title>
 <link rel="stylesheet" href="style.css">
@@ -8,12 +11,55 @@
 <div class="topbar-actions">
   <span id="themeIcon" onclick="toggleTheme()" style="cursor:pointer;font-size:18px;">🌙</span>
 <img id="sidebarProfileImg"
-     src="shizuka.webp"
+     src="c:\Users\Rehan\Downloads\shizuka.webp"
      alt="Profile"
      style="width:40px;height:40px;border-radius:50%;display:none;margin-bottom:20px;">
 
 </div>
+
+
 <body>
+<body>
+
+<header class="topbar">
+  <div class="top-left">
+    <h2 id="pageTitle">Dashboard</h2>
+  </div>
+  
+
+  <div class="top-right">
+
+    <!-- Search (optional but professional) -->
+     <span class="search-icon" onclick="toggleSearch()">🔍</span>
+    <input type="text" class="top-search" placeholder="Search...">
+
+
+    <!-- Theme toggle -->
+    <span id="themeIcon" onclick="toggleTheme()">🌙</span>
+
+    <!-- Profile + menu -->
+    <div class="menu-wrapper">
+      <img id="topProfileImg" alt="Profile">
+      <span class="dots" onclick="toggleMenu()">⋮</span>
+
+      <div class="dropdown" id="menu">
+        <div onclick="openSettings()">⚙ Settings</div>
+        <div class="logout" onclick="logout()">🚪 Logout</div>
+      </div>
+    </div>
+<div class="notify-wrapper">
+  <span class="bell" onclick="toggleNotify()">🔔</span>
+  <span class="badge" id="notifyCount">3</span>
+
+  <div class="notify-dropdown" id="notifyBox">
+    <p><strong>Notifications</strong></p>
+    <div class="notify-item">📄 Resume analyzed</div>
+    <div class="notify-item">📊 ATS score updated</div>
+    <div class="notify-item">✍️ New blog published</div>
+  </div>
+</div>
+  </div>
+</header>
 
 
 <div class="app">
@@ -21,8 +67,9 @@
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="brand">
-    <span class="logo">AI</span>
-    <span class="logo-text">Resume</span>
+    <i class="fa-solid fa-file-lines logo-icon"></i>
+
+    <span class="logo-text"> AI Resume Analyzer</span>
   </div>
   <nav>
     <a class="active" data-tooltip="Dashboard" onclick="switchPage('dashboard',this)">
@@ -44,25 +91,6 @@
   </nav>
 </aside>
 
-<!-- MAIN -->
-<main class="content">
-
-<header class="topbar">
-  <h2 id="pageTitle">Dashboard</h2>
-
-  <div class="topbar-actions">
-    <img id="topProfileImg" alt="Profile">
-
-    <div class="menu-wrapper">
-      <span class="dots" onclick="toggleMenu()">⋮</span>
-
-      <div class="dropdown" id="menu">
-        <div onclick="openSettings()">⚙ Settings</div>
-        <div class="logout" onclick="logout()">🚪 Logout</div>
-      </div>
-    </div>
-  </div>
-</header>
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
 
@@ -96,50 +124,7 @@
     </div>
   </div>
 
-</section> <!-- ✅ DASHBOARD CLOSED -->
 
-<!-- RESUME CREATOR (SIBLING, NOT CHILD) -->
-<section id="creator" class="page">
-
-  <div class="grid-2">
-
-    <!-- FORM -->
-    <div class="card">
-      <h3>Resume Creator</h3>
-
-      <input type="text" id="c_name" placeholder="Full Name">
-      <input type="text" id="c_role" placeholder="Job Role">
-      <input type="email" id="c_email" placeholder="Email">
-
-      <textarea id="c_skills" placeholder="Skills (comma separated)"></textarea>
-      <textarea id="c_projects" placeholder="Projects"></textarea>
-      <textarea id="c_education" placeholder="Education"></textarea>
-
-      <button onclick="updateResume()">Update Preview</button>
-      <button onclick="downloadResume()">Download Resume</button>
-    </div>
-
-    <!-- PREVIEW -->
-    <div class="card resume-preview">
-      <h2 id="p_name">Your Name</h2>
-      <h4 id="p_role">Job Role</h4>
-      <p id="p_email">email@example.com</p>
-
-      <hr>
-
-      <h4>Skills</h4>
-      <p id="p_skills"></p>
-
-      <h4>Projects</h4>
-      <p id="p_projects"></p>
-
-      <h4>Education</h4>
-      <p id="p_education"></p>
-    </div>
-
-  </div>
-
-</section>
 
 
 <!-- SKILL GAP PROGRESS -->
@@ -186,6 +171,52 @@
 <button onclick="downloadReport()">Download Analysis Report</button>
 
 </section>
+<!-- ✅ DASHBOARD CLOSE HERE -->
+
+<!-- RESUME CREATOR (SIBLING, NOT CHILD) -->
+<section id="creator" class="page">
+
+  <div class="grid-2">
+
+    <!-- FORM -->
+    <div class="card">
+      <h3>Resume Creator</h3>
+
+      <input type="text" id="c_name" placeholder="Full Name">
+      <input type="text" id="c_role" placeholder="Job Role">
+      <input type="email" id="c_email" placeholder="Email">
+
+      <textarea id="c_skills" placeholder="Skills (comma separated)"></textarea>
+      <textarea id="c_projects" placeholder="Projects"></textarea>
+      <textarea id="c_education" placeholder="Education"></textarea>
+
+      <button onclick="updateResume()">Update Preview</button>
+      <button onclick="downloadResume()">Download Resume</button>
+    </div>
+
+    <!-- PREVIEW -->
+    <div class="card resume-preview">
+      <h2 id="p_name">Your Name</h2>
+      <h4 id="p_role">Job Role</h4>
+      <p id="p_email">email@example.com</p>
+
+      <hr>
+
+      <h4>Skills</h4>
+      <p id="p_skills"></p>
+
+      <h4>Projects</h4>
+      <p id="p_projects"></p>
+
+      <h4>Education</h4>
+      <p id="p_education"></p>
+    </div>
+
+  </div>
+
+</section>
+
+</section>
 
 <!-- RESUME ANALYZER -->
 <section id="resume" class="page">
@@ -198,12 +229,115 @@
 
     <p class="muted">*Demo supports .txt files only</p>
   </div>
+  <div class="grid-2">
+
+  <!-- ATS SCORE -->
+  <div class="card center">
+    <h4>ATS Score</h4>
+    <div class="progress-circle" id="atsCircle">
+      <span id="atsValue">0%</span>
+    </div>
+    <p class="muted">Resume compatibility score</p>
+  </div>
+
+  <!-- SKILLS RESULT -->
+  <div class="card">
+    <h4>Skill Analysis</h4>
+
+    <p><strong>Matched Skills</strong></p>
+    <div id="matchedSkills" class="skills"></div>
+
+    <p><strong>Missing Skills</strong></p>
+    <div id="missingSkills" class="skills"></div>
+  </div>
+
+</div>
+
 </section>
 
 <!-- BLOGS -->
 <section id="blogs" class="page">
-  <div class="card">Blogs Page</div>
+
+  <div class="card">
+    <h3>Latest Blogs</h3>
+    <p class="muted">Insights on resumes, ATS, skills & hiring trends</p>
+  </div>
+
+  <div class="grid-2">
+
+    <!-- BLOG CARD -->
+    <div class="card blog-card">
+      <span class="tag">ATS</span>
+      <h4>How ATS Works in Resume Screening</h4>
+      <p>
+        Learn how Applicant Tracking Systems filter resumes and
+        how to optimize your resume for better shortlisting.
+      </p>
+      <button class="secondary"
+onclick="openBlog(
+'How ATS Works in Resume Screening',
+'ATS systems scan resumes using keywords, formatting and relevance. Optimizing your resume improves shortlisting chances.'
+)">
+Read More
+</button>
+
+    </div>
+
+    <div class="card blog-card">
+      <span class="tag">Skills</span>
+      <h4>Top Frontend Skills in 2025</h4>
+      <p>
+        Discover the most in-demand frontend skills recruiters
+        are looking for this year.
+      </p>
+      <button class="secondary"
+onclick="openBlog(
+'Top Frontend Skills in 2025',
+'React, TypeScript, performance optimization, modern CSS and accessibility are top frontend skills recruiters expect.'
+)">
+Read More
+</button>
+
+    </div>
+
+    <div class="card blog-card">
+      <span class="tag">Career</span>
+      <h4>How to Improve Resume Score</h4>
+      <p>
+        Simple techniques to improve your resume score and
+        increase interview chances.
+      </p>
+      <button class="secondary"
+onclick="openBlog(
+'How to Improve Resume Score',
+'Using relevant keywords, clean formatting and measurable achievements improves resume score significantly.'
+)">
+Read More
+</button>
+
+    </div>
+
+    <div class="card blog-card">
+      <span class="tag">AI</span>
+      <h4>Role of AI in Resume Analysis</h4>
+      <p>
+        Understand how AI helps analyze resumes and recommend
+        skills and courses.
+      </p>
+      <button class="secondary"
+onclick="openBlog(
+'Role of AI in Resume Analysis',
+'AI analyzes resumes using NLP and machine learning to recommend skills, roles and courses.'
+)">
+Read More
+</button>
+
+    </div>
+
+  </div>
+
 </section>
+
 
 <!-- SETTINGS -->
 <section id="settings" class="page">
@@ -265,6 +399,31 @@
 
 </main>
 </div>
+<div class="modal" id="blogModal"
+style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);
+align-items:center;justify-content:center;z-index:9999">
+
+  <div class="modal-content"
+       style="background:#fff;padding:25px;width:420px;border-radius:12px">
+    <h3 id="blogTitle"></h3>
+    <p id="blogContent"></p>
+    <button onclick="closeBlog()">Close</button>
+  </div>
+
+</div>
+<div class="modal" id="courseModal"
+style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);
+align-items:center;justify-content:center;z-index:9999">
+
+  <div class="modal-content"
+       style="background:#fff;padding:25px;width:420px;border-radius:12px">
+    <h3 id="courseTitle"></h3>
+    <ul id="courseList"></ul>
+    <button onclick="closeCourse()">Close</button>
+  </div>
+
+</div>
+
 
 <script>
 /* PAGE SWITCH */
@@ -472,7 +631,127 @@ function updateResume(){
 function downloadResume(){
   window.print(); // viva-safe PDF method
 }
+// BLOG MODAL — GLOBAL FUNCTIONS (ADD ONLY)
+function openBlog(title, content){
+  document.getElementById("blogTitle").innerText = title;
+  document.getElementById("blogContent").innerText = content;
+  document.getElementById("blogModal").style.display = "flex";
+}
 
+function closeBlog(){
+  document.getElementById("blogModal").style.display = "none";
+}
+/* ===== RESUME ANALYZER ADDITION ===== */
+
+const REQUIRED_SKILLS = [
+  "html","css","javascript","react","node","sql","git","api"
+];
+
+function recalcATS(text){
+
+  let matched = [];
+  let missing = [];
+
+  REQUIRED_SKILLS.forEach(skill=>{
+    text.includes(skill)
+      ? matched.push(skill)
+      : missing.push(skill);
+  });
+
+  const score = Math.min(
+    95,
+    Math.round((matched.length / REQUIRED_SKILLS.length) * 100)
+  );
+
+  document.getElementById("scoreText").innerText = score + "%";
+  renderSkills(matched, missing);
+  animateATS(score);
+}
+function renderSkills(matched, missing){
+
+  const matchedBox = document.getElementById("matchedSkills");
+  const missingBox = document.getElementById("missingSkills");
+
+  if(!matchedBox || !missingBox) return;
+
+  matchedBox.innerHTML = "";
+  missingBox.innerHTML = "";
+
+  matched.forEach(skill=>{
+    const span = document.createElement("span");
+    span.className = "skill good";
+    span.innerText = skill.toUpperCase();
+
+    span.addEventListener("click", ()=>{
+      showCourses(skill);
+    });
+
+    matchedBox.appendChild(span);
+  });
+
+  missing.forEach(skill=>{
+    const span = document.createElement("span");
+    span.className = "skill missing";
+    span.innerText = skill.toUpperCase();
+
+    span.addEventListener("click", ()=>{
+      showCourses(skill);
+    });
+
+    missingBox.appendChild(span);
+  });
+}
+
+/* ===== GLOBAL SKILL → COURSE FUNCTION (ADD ONLY) ===== */
+function showCourses(skill){
+
+  const title = document.getElementById("courseTitle");
+  const list = document.getElementById("courseList");
+  const modal = document.getElementById("courseModal");
+
+  if(!title || !list || !modal){
+    alert("Course modal elements missing");
+    return;
+  }
+
+  const courses = {
+    html: ["HTML Basics – Udemy", "HTML & CSS – Coursera"],
+    css: ["Advanced CSS – Coursera"],
+    javascript: ["JavaScript Deep Dive – Udemy"],
+    react: ["React Mastery – Udemy"],
+    node: ["Node.js Bootcamp – Udemy"],
+    sql: ["SQL for Beginners – Udemy"],
+    git: ["Git & GitHub – Udemy"],
+    api: ["REST API Fundamentals – Udemy"]
+  };
+
+  title.innerText = skill.toUpperCase() + " Courses";
+  list.innerHTML = "";
+
+  (courses[skill] || ["No courses available"]).forEach(c=>{
+    const li = document.createElement("li");
+    li.innerText = c;
+    list.appendChild(li);
+  });
+
+  modal.style.display = "flex";
+}
+
+function closeCourse(){
+  document.getElementById("courseModal").style.display = "none";
+}
+
+function toggleNotify(){
+  document.getElementById("notifyBox").classList.toggle("show");
+}
+
+document.addEventListener("click",e=>{
+  const bell = document.querySelector(".bell");
+  const box = document.getElementById("notifyBox");
+  if(!bell.contains(e.target) && !box.contains(e.target)){
+    box.classList.remove("show");
+  }
+});
 
 </script>
 
